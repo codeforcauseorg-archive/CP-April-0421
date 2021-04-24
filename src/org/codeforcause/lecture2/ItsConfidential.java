@@ -11,8 +11,6 @@ public class ItsConfidential {
         if (mid > 0) {
             return str.charAt(mid)+
                     decrypt(str.substring(0,mid)) + decrypt(str.substring(mid+1));
-        } else if (mid < 0) {
-            return "";
         }
         return str;
     }
