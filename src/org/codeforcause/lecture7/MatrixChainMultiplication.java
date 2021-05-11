@@ -1,4 +1,4 @@
-package org.codeforcause.Lecture7;
+package org.codeforcause.lecture7;
 
 public class MatrixChainMultiplication {
     public static void main(String[] args) {

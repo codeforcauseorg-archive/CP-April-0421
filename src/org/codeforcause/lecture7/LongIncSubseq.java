@@ -1,4 +1,4 @@
-package org.codeforcause.Lecture7;
+package org.codeforcause.lecture7;
 
 import java.util.Arrays;
 

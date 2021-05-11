@@ -1,4 +1,4 @@
-package org.codeforcause.Lecture7;
+package org.codeforcause.lecture7;
 
 public class WildcardPattern {
     public static void main(String[] args) {
