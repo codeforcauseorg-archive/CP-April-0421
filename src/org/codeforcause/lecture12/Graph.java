@@ -157,4 +157,60 @@ public class Graph<E extends Comparable<E>> {
         }
         return totalCost;
     }
+
+    class DjPair implements Comparable<DjPair> {
+        int cost;
+        E connectingVertex;
+        E endingVertex;
+
+        DjPair(E connectingVertex, int cost, E endingVertex) {
+            this.connectingVertex = connectingVertex;
+            this.endingVertex = endingVertex;
+            this.cost = cost;
+        }
+
+        @Override
+        public int compareTo(DjPair pair) {
+            return this.cost - pair.cost;
+        }
+    }
+
+    public void dijkstra (E source) {
+        HashMap<E, DjPair> map = new HashMap<>();
+        PriorityQueue<DjPair> minHeap = new PriorityQueue<>();
+        Set<E> allVertices = this.vertices.keySet();
+
+        for (E vertex : allVertices) {
+            DjPair pair;
+            if (vertex.equals(source)) {
+                pair = new DjPair(null, 0, vertex);
+            } else {
+                pair = new DjPair(null, Integer.MAX_VALUE, vertex);
+            }
+            minHeap.add(pair);
+            map.put(vertex, pair);
+        }
+
+        while (!minHeap.isEmpty()) {
+            DjPair currPair = minHeap.remove();
+            map.remove(currPair.endingVertex);
+            System.out.println(currPair.endingVertex + " -> " + currPair.cost);
+            Set<Vertex> neighbourSet = vertices.get(currPair.endingVertex).neighbours.keySet();
+            for (Vertex padosi : neighbourSet) {
+                if (map.containsKey(padosi.value)) {
+                    DjPair pair = map.get(padosi.value);
+                    int oldCost = pair.cost;
+                    int edgeCost = vertices.get(currPair.endingVertex).neighbours.get(padosi);
+                    int newCost = currPair.cost + edgeCost;
+                    if (newCost < oldCost) {
+                        minHeap.remove(map.get(padosi.value));
+                        pair.cost = newCost;
+                        pair.connectingVertex = currPair.endingVertex;
+                        map.put(padosi.value, pair);
+                        minHeap.add(pair);
+                    }
+                }
+            }
+        }
+    }
 }
