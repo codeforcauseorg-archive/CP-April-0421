@@ -12,7 +12,6 @@ public class PrefixMax {
             nums[i] = s.nextInt();
             update(i,nums[i], n, BIT);
         }
-
         int q = s.nextInt();
         while (q-- > 0){
             int ind = s.nextInt();
@@ -33,7 +32,6 @@ public class PrefixMax {
             ans = Math.max(BIT[i], ans);
             i -= (i & (-i));
         }
-
         return ans;
     }
 }
